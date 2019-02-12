@@ -5,7 +5,7 @@ dependencies:
   - python=3.5
   - pandas
   - numpy
-  - theano 
+  - theano
   - mingw
   - libpython
   - jupyter
