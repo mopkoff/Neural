@@ -1,4 +1,6 @@
 from random import choice
+from os import curdir, path
+from settings import *
 
 
 def scramble(x: str, input_classes: {str: [str]}, output_classes: {str: [str]}):
@@ -12,15 +14,19 @@ def scramble(x: str, input_classes: {str: [str]}, output_classes: {str: [str]}):
 
 def main():
     import pandas as pd
-    df = pd.read_csv('datasets/student-mat.csv')
 
-    input_classes = {'m': ['M', 'm'], 'f': ['F', 'f']}
-    output_classes = {'m': ['Male', 'mAle', 'maLe', 'malE', 'MALE'],
-                      'f': ['Female', 'FEMALE']}
+    for csv in CSVS.values():
+        scramble_info = csv['scramble']
 
-    df['sex'] = df['sex'].apply(lambda x: scramble(x, input_classes, output_classes))
+        b_path = path.join(curdir, BACKUP_DIR, csv['filename'])
+        d_path = path.join(curdir, DATASET_DIR, csv['filename'])
+        df = pd.read_csv(b_path)
 
-    print(df.head(20))
+        if scramble_info is not None:
+            df[scramble_info['field']] = df[scramble_info['field']].apply(lambda x: scramble(x, scramble_info['in'],
+                                                                                                scramble_info['out']))
+
+        df.to_csv(d_path)
 
 
 if __name__ == '__main__':
