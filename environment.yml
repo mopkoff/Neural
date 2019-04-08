@@ -1,15 +1,20 @@
-name: neuralnets
+name: ai
 channels:
   - defaults
 dependencies:
-  - python=3.5
-  - pandas
-  - numpy
-  - theano
-  - mingw
-  - libpython
+  - ipywidgets
   - jupyter
   - matplotlib
+  - nb_conda
+  - nltk
+  - notebook
+  - numpy
+  - pandas
+  - pip
+  - python
+  - scikit-learn
+  - scipy
   - pip:
     - keras
-
+    - tensorflow
+   
